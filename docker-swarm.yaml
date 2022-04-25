@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     nginx:
-        image: nginx:latest
+        image: nginx:mainline
         labels:
             - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true
         ports:
