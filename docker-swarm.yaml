@@ -19,12 +19,18 @@ services:
             - backend
         deploy:
             replicas: 3
+            restart_policy:
+                delay: 5s
+                max_attempts: 10
+                window: 60s
             rollback_config:
-                parallelism: 0
+                delay: 5s
+                monitor: 60s
             update_config:
                 parallelism: 1
                 delay: 5s
-                failure_action: rollback
+                monitor: 60s
+                failure_action: rollback 
     docker-gen:
         image: helder/docker-gen:latest
         labels:
@@ -41,8 +47,14 @@ services:
             - acme
             - backend
         deploy:
-            update_config:
+            restart_policy:
                 delay: 5s
+                max_attempts: 10
+                window: 60s
+            rollback_config:
+                monitor: 60s
+            update_config:
+                monitor: 60s
                 failure_action: rollback
     acme-companion:
         image: nginxproxy/acme-companion:latest
@@ -58,8 +70,14 @@ services:
         networks:
             - acme
         deploy:
-            update_config:
+            restart_policy:
                 delay: 5s
+                max_attempts: 10
+                window: 60s
+            rollback_config:
+                monitor: 60s
+            update_config:
+                monitor: 60s
                 failure_action: rollback
 volumes:
     acme:
