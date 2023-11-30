@@ -59,7 +59,7 @@ services:
     acme-companion:
         image: nginxproxy/acme-companion:latest
         environment:
-            DEFAULT_EMAIL: fsu.cs.acm@gmail.com
+            DEFAULT_EMAIL: email@example.com
         volumes:
             - acme:/etc/acme.sh
             - certs:/etc/nginx/certs:rw
